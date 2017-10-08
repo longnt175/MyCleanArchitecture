@@ -1,5 +1,4 @@
-# Photo Viewer Sample
-This is the sample of Clean Architecture in Real Conditions
+This is the base of Clean Architecture Android Project
 
 This project has been influenced by:
 
