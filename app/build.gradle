@@ -1,19 +1,26 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'me.tatarka.retrolambda'
 
 // Libraries versions
-def lib = [lombok        : "1.16.8",
-           dagger        : "1.2.5",
-           butterknife   : "8.6.0",
-           googleSupport : "25.3.1",
-           rxJava        : "2.1.5",
-           ormlite       : "5.0",
-           okhttp3       : "3.8.0",
-           retrofit2     : "2.3.0",
-           picasso       : "2.5.2",
-           testSupport   : "0.5",
-           cucumber      : "1.2.2",
-           espresso      : "2.2.2"]
+def lib = [lombok            : "1.16.18",
+           kotlin            : "1.1.2-3",
+           dagger            : "2.11",
+           butterknife       : "8.6.0",
+           googleSupport     : "25.3.1",
+           rxAndroid         : "2.0.1",
+           rxJava            : "2.1.4",
+           ormlite           : "5.0",
+           okhttp3           : "3.8.0",
+           retrofit2         : "2.3.0",
+           retrofitRxJava2   : '1.0.0',
+           retrofitLogging   : '3.9.0',
+           timber            : '4.5.1',
+           picasso           : "2.5.2",
+           testSupport       : "0.5",
+           cucumber          : "1.2.2",
+           espresso          : "2.2.2"]
 
 android {
   compileSdkVersion 25
@@ -59,12 +66,12 @@ android {
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
 
-  provided "org.projectlombok:lombok:${lib.lombok}"
-
+  provided  "org.projectlombok:lombok:${lib.lombok}"
+  compile "org.jetbrains.kotlin:kotlin-stdlib:${lib.kotlin}"
 
   // Dependency Injection
-  compile "com.squareup.dagger:dagger:${lib.dagger}"
-  provided "com.squareup.dagger:dagger-compiler:${lib.dagger}"
+  compile "com.google.dagger:dagger:${lib.dagger}"
+  provided "com.google.dagger:dagger-compiler:${lib.dagger}"
 
   // View Injection
   compile "com.jakewharton:butterknife:${lib.butterknife}"
@@ -78,8 +85,7 @@ dependencies {
 
   // ReactiveX
   compile "io.reactivex.rxjava2:rxjava:${lib.rxJava}"
-  compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
+  compile "io.reactivex.rxjava2:rxandroid:${lib.rxAndroid}"
 
   // Database
   compile "com.j256.ormlite:ormlite-core:${lib.ormlite}"
@@ -88,12 +94,14 @@ dependencies {
   // OkHttp
   compile "com.squareup.okhttp3:okhttp-urlconnection:${lib.okhttp3}"
   compile "com.squareup.okhttp3:okhttp:${lib.okhttp3}"
-  compile "com.squareup.okhttp3:logging-interceptor:${lib.okhttp3}"
+
 
   // Retrofit
   compile "com.squareup.retrofit2:retrofit:${lib.retrofit2}"
-  compile "com.squareup.retrofit2:adapter-rxjava2:${lib.retrofit2}"
+  compile "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${lib.retrofitRxJava2}"
   compile "com.squareup.retrofit2:converter-gson:${lib.retrofit2}"
+  compile "com.squareup.okhttp3:logging-interceptor:${lib.retrofitLogging}"
+  compile "com.jakewharton.timber:timber:${lib.timber}"
 
   // Image Loader
   compile "com.squareup.picasso:picasso:${lib.picasso}"
@@ -104,6 +112,10 @@ dependencies {
   testCompile 'org.mockito:mockito-core:2.6.5'
   testCompile 'org.assertj:assertj-core:1.7.1'
 
+  // Kotlin Unit Tests
+  testCompile "org.jetbrains.kotlin:kotlin-test:${lib.kotlin}"
+  testCompile "org.jetbrains.kotlin:kotlin-test-junit:${lib.kotlin}"
+  testCompile "com.nhaarman:mockito-kotlin:1.2.0"
 
   // Android Tests
   androidTestCompile("com.android.support.test:runner:${lib.testSupport}") {
