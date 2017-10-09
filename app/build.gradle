@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
 apply plugin: 'me.tatarka.retrolambda'
 
 // Libraries versions
@@ -113,9 +113,9 @@ dependencies {
   testCompile 'org.assertj:assertj-core:1.7.1'
 
   // Kotlin Unit Tests
-  testCompile "org.jetbrains.kotlin:kotlin-test:${lib.kotlin}"
-  testCompile "org.jetbrains.kotlin:kotlin-test-junit:${lib.kotlin}"
-  testCompile "com.nhaarman:mockito-kotlin:1.2.0"
+  //testCompile "org.jetbrains.kotlin:kotlin-test:${lib.kotlin}"
+  //testCompile "org.jetbrains.kotlin:kotlin-test-junit:${lib.kotlin}"
+  //testCompile "com.nhaarman:mockito-kotlin:1.2.0"
 
   // Android Tests
   androidTestCompile("com.android.support.test:runner:${lib.testSupport}") {
